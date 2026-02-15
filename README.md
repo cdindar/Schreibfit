@@ -1,7 +1,7 @@
-#Schreibfit
+# Schreibfit
 Github Repository für unser Projekt (Rechtschreibtrainer, Kooperation ITP/SEW)
 
-Zu Beginn erscheint eine Anmelde-Seite, auf der lediglich überprüft wird, ob eine gültige TGM-Schüler-E-Mail-Adresse eingegeben wird. Ein echtes Benutzerkonto-System gibt es nicht — das Passwort dient nur als Platzhalter für ein mögliches zukünftiges Login-Konzept.
+Zu Beginn erscheint eine Anmelde-Seite, auf der lediglich überprüft wird, ob eine gültige TGM-Schüler-E-Mail-Adresse eingegeben wird. Ein echtes Benutzerkonto-System gibt es nicht, das Passwort dient nur als Platzhalter für ein mögliches zukünftiges Login-Konzept.
 
 Nach dem Login gelangt man ins Hauptmenü. Dort kann man zwischen mehreren Funktionen wählen. Im Verwaltungsbereich lassen sich Fragen aus einer Textdatei laden, bearbeiten, löschen oder neu erstellen. Dabei gibt es zwei Fragetypen: Textfragen (z. B. Beschreibungen oder Lückentexte) sowie Bildfragen in Form von URLs.
 

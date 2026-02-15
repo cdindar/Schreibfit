@@ -1,0 +1,80 @@
+# =========================
+# LEICHT (20)
+# =========================
+
+TEXT;Hinweis: Spielzeug — Wie schreibt man richtig? (Ba_l) ;Ball;Leicht
+TEXT;Hinweis: Himmelskörper — Wie schreibt man richtig? (So__e) ;Sonne;Leicht
+TEXT;Hinweis: Haustier — Wie schreibt man richtig? (Hu_d) ;Hund;Leicht
+TEXT;Hinweis: Haustier — Wie schreibt man richtig? (Ka__e) ;Katze;Leicht
+TEXT;Hinweis: Wildtier — Wie schreibt man richtig? (Ti__r) ;Tiger;Leicht
+TEXT;Hinweis: Tier das fliegt — Wie schreibt man richtig? (Vo__l) ;Vogel;Leicht
+TEXT;Hinweis: Kleidung — Wie schreibt man richtig? (Ho_e) ;Hose;Leicht
+TEXT;Hinweis: Möbelstück — Wie schreibt man richtig? (St__l) ;Stuhl;Leicht
+TEXT;Hinweis: Nahrung — Wie schreibt man richtig? (Br_t) ;Brot;Leicht
+TEXT;Hinweis: Tier im Wasser — Wie schreibt man richtig? (Fi__h) ;Fisch;Leicht
+TEXT;Hinweis: Mehrzahl von Haus — (H__user) ;Häuser;Leicht
+TEXT;Hinweis: Mehrzahl von Buch — (B__cher) ;Bücher;Leicht
+TEXT;Hinweis: Raum zum Kochen — (K__che) ;Küche;Leicht
+TEXT;Hinweis: Körperteil — (F__ße) ;Füße;Leicht
+
+IMAGE;https://image.jimcdn.com/app/cms/image/transf/dimension=1920x10000:format=jpg/path/s773f0b7acb31ce72/image/i1a929c29e53043aa/version/1536147543/roter-apfel-mit-einzelnem-gr%C3%BCnen-blatt-vor-wei%C3%9Fem-hintergrund.jpg;Apfel;Leicht
+IMAGE;https://media.4-paws.org/a/5/c/4/a5c4c9cdfd3a8ecb58e9b1a5bd496c9dfbc3cedc/VIER%20PFOTEN_2020-10-07_00132-2890x2000-1920x1329.jpg;Katze;Leicht
+IMAGE;https://www.futtermedicus.at/media/b6/bb/04/1712056234/golden_retriever_welpe.jpg;Hund;Leicht
+IMAGE;https://naturschutzbund.at/files/presse/bilder_download/set_saeugetiere/igel_pixabay.jpg;Igel;Leicht
+IMAGE;https://www.nabu.de/imperia/md/nabu/images/arten/tiere/voegel/sperlinge/141114-nabu-haussperling-im-schnee-frank-derer4.jpeg;Spatz;Leicht
+
+# =========================
+# MITTEL (20)
+# =========================
+
+TEXT;Hinweis: Schneeball werfen — Schreibe richtig (Sc_____ll) ;Schneeball;Mittel
+TEXT;Hinweis: Ferien im Sommer — Schreibe richtig (So_________en) ;Sommerferien;Mittel
+TEXT;Hinweis: Aufgabe für Schule — Schreibe richtig (Ha_______be) ;Hausaufgabe;Mittel
+TEXT;Hinweis: Flasche mit Wasser — Schreibe richtig (Wa_________he) ;Wasserflasche;Mittel
+TEXT;Hinweis: Tisch zum Lernen — Schreibe richtig (Sc_______ch) ;Schreibtisch;Mittel
+TEXT;Hinweis: Heft für Schule — Schreibe richtig (Sc____ft) ;Schulheft;Mittel
+TEXT;Hinweis: Sportler — Schreibe richtig (Fu__________er) ;Fußballspieler;Mittel
+TEXT;Hinweis: Lieblingsfach in Schule — Schreibe richtig (Li_________ch) ;Lieblingsfach;Mittel
+TEXT;Hinweis: Gerät zum Rechnen — Schreibe richtig (Ta__________er) ;Taschenrechner;Mittel
+TEXT;Hinweis: Öffentliches Verkehrsmittel — Schreibe richtig (St_______hn) ;Straßenbahn;Mittel
+TEXT;Hinweis: Zimmer zum Schlafen — Schreibe richtig (Sc________er) ;Schlafzimmer;Mittel
+TEXT;Hinweis: Gerät zum Fernsehen — Schreibe richtig (Fe_____er) ;Fernseher;Mittel
+TEXT;Hinweis: Süßigkeit — Schreibe richtig (Sc______de) ;Schokolade;Mittel
+TEXT;Hinweis: Essen am Mittag — Schreibe richtig (Mi_______en) ;Mittagessen;Mittel
+TEXT;Hinweis: Raum in Schule — Schreibe richtig (Sc______se) ;Schulklasse;Mittel
+TEXT;Hinweis: Jacke im Winter — Schreibe richtig (Wi_______ke) ;Winterjacke;Mittel
+TEXT;Hinweis: Arbeiter im Haus — Schreibe richtig (Ha______er) ;Hausmeister;Mittel
+TEXT;Hinweis: Licht an Straße — Schreibe richtig (St__________ne) ;Straßenlaterne;Mittel
+
+IMAGE;https://image.geo.de/30042240/t/_c/v3/w960/r0/-/koala-gross-jpg--17141-.jpg;Koala;Mittel
+IMAGE;https://www.planet-wissen.de/natur/wildtiere/giraffen/introgiraffenmamagjpg100~_v-gseagaleriexl.jpg;Giraffe;Mittel
+IMAGE;https://www.wwf.de/fileadmin/_processed_/c/a/csm_afrikanischer-savannenelefant-suedafrika-WW267191-c-kinjal-vasavada_1338da7deb.jpg;Elefant;Mittel
+IMAGE;https://wwf-jugend.de/wp-content/uploads/2025/08/compressed-5a69c9800adbd1ed65cdcbe7b725fd59.webp;Nilpferd;Mittel
+IMAGE;https://www.tierchenwelt.de/images/stories/fotos/voegel/spechte/tukan/tukan_riesentukan_steckbrief_l.jpg;Tukan;Mittel
+IMAGE;https://b2386983.smushcdn.com/2386983/wp-content/uploads/2024/04/Plains-Zebra-body.jpg?lossy=0&strip=1&webp=1;Zebra;Mittel
+
+# =========================
+# SCHWER (20)
+# =========================
+
+TEXT;Hinweis: Musikbegriff — Schreibe richtig (R____mus) ;Rhythmus;Schwer
+TEXT;Hinweis: Geldbörse — Schreibe richtig (Portemo______) ;Portemonnaie;Schwer
+TEXT;Hinweis: Schattenumriss — Schreibe richtig (S________e) ;Silhouette;Schwer
+TEXT;Hinweis: Starkes Verhalten — Schreibe richtig (A______ion) ;Aggression;Schwer
+TEXT;Hinweis: Wohnortangabe — Schreibe richtig (A_____e) ;Adresse;Schwer
+TEXT;Hinweis: Modezubehör — Schreibe richtig (A_______re) ;Accessoire;Schwer
+TEXT;Hinweis: Verwaltungssystem — Schreibe richtig (Büro_____e) ;Bürokratie;Schwer
+TEXT;Hinweis: Feinkostladen — Schreibe richtig (Deli_____________t) ;Delikatessgeschäft;Schwer
+TEXT;Hinweis: Etwas falsch verstehen — Schreibe richtig (M____________is) ;Missverständnis;Schwer
+TEXT;Hinweis: Geometrische Form — Viereck mit parallelen Seiten (P____________m) ;Parallelogramm;Schwer
+TEXT;Hinweis: Hygieneprodukt — Schreibe richtig (D________________l) ;Desinfektionsmittel;Schwer
+TEXT;Hinweis: Energieform — Schreibe richtig (E___________t) ;Elektrizität;Schwer
+TEXT;Hinweis: Pflanzenprozess — Schreibe richtig (F__________e) ;Fotosynthese;Schwer
+TEXT;Hinweis: Sauberkeitsregeln — Schreibe richtig (H_____________en) ;Hygienemaßnahmen;Schwer
+
+IMAGE;https://images.photowall.com/products/52977/bengal-tiger.jpg?h=699&q=85;Bengaltiger;Schwer
+IMAGE;https://im.contentlounge.net/styles/manual_crop/s3/2020-07/Schneeleopard.jpg?im=AspectCrop%2Csize%3D%2816%2C9%29%2Cgravity%3DCenter%2CallowExpansion%2CBackgroundColor%2Ccolor%3Dtransparent&hash=7475a26b682fcc628c814a472783de7df02afd2981ed3d071732c4a8641b635e;Schneeleopard;Schwer
+IMAGE;https://image.geo.de/30093758/t/TN/v3/w960/r0/-/auto-01-popup-jpg--1887-.jpg;Weißkopfseeadler;Schwer
+IMAGE;https://c8.alamy.com/compde/wb69d3/eb-1911-carnivora-abb-6-die-parti-farbige-tragen-oder-panda-wb69d3.jpg;Riesenpanda;Schwer
+IMAGE;https://www.kribbelbunt.de/fileadmin/user_upload/Triceratops.png;Triceratops;Schwer
+IMAGE;https://www.zooroyal.de/magazin/wp-content/uploads/2016/01/Cham%C3%A4leon-760x570.jpg;Chamäleon;Schwer

@@ -1,0 +1,43 @@
+Ball;Gegenstand für diverse Spiele
+Tisch;Möbelstück zum Essen oder Arbeiten
+Stuhl;Möbelstück zum Sitzen
+Apfel;Rotes oder grünes Obst
+Banane;Gelbes Obst
+Hund;Beliebtes Haustier
+Katze;Haustier das miaut
+Vogel;Tier das fliegen kann
+Fisch;Lebt im Wasser
+Auto;Fahrzeug mit vier Rädern
+
+Schule;Ort zum Lernen
+Lehrer;Person die Unterricht gibt
+Buch;Zum Lesen gedacht
+Heft;Zum Schreiben in der Schule
+Tafel;Schreibfläche im Klassenzimmer
+Rucksack;Transportiert Schulsachen
+Bleistift;Schreibgerät aus Holz
+Radiergummi;Entfernt Bleistift
+Lineal;Misst Längen
+Schere;Schneidewerkzeug
+
+Fenster;Lässt Licht ins Zimmer
+Tür;Zum Öffnen und Schließen von Räumen
+Lampe;Spendet Licht
+Bett;Möbelstück zum Schlafen
+Decke;Hält warm beim Schlafen
+Kissen;Liegt unter dem Kopf
+Spiegel;Zeigt dein Spiegelbild
+Dusche;Zum Waschen
+Seife;Reinigungsmittel
+Handtuch;Zum Abtrocknen
+
+Computer;Elektronisches Gerät
+Tastatur;Zum Tippen am PC
+Bildschirm;Zeigt Inhalte an
+Maus;Steuergerät am Computer
+Drucker;Druckt Dokumente
+Handy;Mobiles Telefon
+Kopfhörer;Zum Musikhören
+Fernseher;Zeigt Filme und Serien
+Kamera;Macht Fotos
+Lautsprecher;Gibt Ton wieder

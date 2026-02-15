@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel root = new JPanel(new BorderLayout());
+        JPanel root = new JPanel(new GridLayout(2, 1));
         root.setBackground(BEIGE);
 
         JPanel header = new JPanel(new BorderLayout());

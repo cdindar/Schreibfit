@@ -375,3 +375,138 @@ public class AppController {
         t.setRepeats(false);
         t.start();
     }
+    private void quizEnde() {
+        int gesamt = quizRichtig + quizFalsch;
+        double prozent = 0;
+        if (gesamt > 0) prozent = quizRichtig * 100.0 / gesamt;
+        pool.registriereErgebnis(prozent);
+        MenuView menu = new MenuView();
+        menu.setTitel("Quiz Ergebnis");
+        menu.setInfo(String.format("Richtig: %d | Falsch: %d | %.0f%%", quizRichtig, quizFalsch, prozent));
+        JButton b1 = new JButton("Nochmal Quiz");
+        JButton b2 = new JButton("Hauptmenü");
+        menu.setButtons(new JButton[]{b1, b2});
+        b1.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeQuizStufe(); }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+        });
+        frame.setView(menu);
+    }
+
+    private void starteWortsalat() {
+        wortsalatPool.ladeAusDatei("wortsalat.txt");
+        wortsalatSession = wortsalatPool.erstelleSession(10);
+        wortsalatIndex = 0;
+        wortsalatRichtig = 0;
+        wortsalatFalsch = 0;
+        if (wortsalatSession.length == 0) {
+            JOptionPane.showMessageDialog(frame, "wortsalat.txt ist leer oder fehlt.", "Hinweis", JOptionPane.INFORMATION_MESSAGE);
+            zeigeHauptmenue();
+            return;
+        }
+        zeigeWortsalatRunde();
+    }
+
+    private void zeigeWortsalatRunde() {
+        final SpielView v = new SpielView();
+        final WortsalatWort w = wortsalatSession[wortsalatIndex];
+        v.fortschrittLabel.setText((wortsalatIndex + 1) + "/" + wortsalatSession.length);
+        v.feedbackLabel.setText(" ");
+        v.eingabeField.setEnabled(true);
+        v.pruefenBtn.setEnabled(true);
+        v.eingabeField.setText("");
+        v.backBtn.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+        });
+        v.gemischtLabel.setText(mischeWort(w.wort).toUpperCase());
+        v.hinweisLabel.setText("Hinweis: " + w.hinweis);
+        v.pruefenBtn.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { wortsalatPruefen(v, w); }
+        });
+        v.eingabeField.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { wortsalatPruefen(v, w); }
+        });
+        frame.setView(v);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { v.eingabeField.requestFocusInWindow(); }
+        });
+    }
+
+    private void wortsalatPruefen(SpielView v, WortsalatWort w) {
+        String eingabe = v.eingabeField.getText().trim();
+        boolean richtig = eingabe.equalsIgnoreCase(w.wort);
+        if (richtig) {
+            wortsalatRichtig++;
+            score += 2;
+            frame.updateScore(score);
+            v.feedbackLabel.setText("Richtig! +2 Punkte");
+            v.feedbackLabel.setForeground(new Color(0, 255, 0));
+        } else {
+            wortsalatFalsch++;
+            v.feedbackLabel.setText("Falsch! Richtig: " + w.wort);
+            v.feedbackLabel.setForeground(new Color(255, 0, 0));
+        }
+        v.pruefenBtn.setEnabled(false);
+        v.eingabeField.setEnabled(false);
+        Timer t = new Timer(1500, new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                wortsalatIndex++;
+                if (wortsalatIndex >= wortsalatSession.length) wortsalatEnde();
+                else zeigeWortsalatRunde();
+            }
+        });
+        t.setRepeats(false);
+        t.start();
+    }
+
+    private void wortsalatEnde() {
+        int gesamt = wortsalatRichtig + wortsalatFalsch;
+        double prozent = 0;
+        if (gesamt > 0) prozent = wortsalatRichtig * 100.0 / gesamt;
+        MenuView menu = new MenuView();
+        menu.setTitel("Wortsalat Ergebnis");
+        menu.setInfo(String.format("Richtig: %d | Falsch: %d | %.0f%%", wortsalatRichtig, wortsalatFalsch, prozent));
+        JButton b1 = new JButton("Nochmal Wortsalat");
+        JButton b2 = new JButton("Hauptmenü");
+        menu.setButtons(new JButton[]{b1, b2});
+        b1.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { starteWortsalat(); }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+        });
+        frame.setView(menu);
+    }
+
+    private String mischeWort(String wort) {
+        if (wort == null) return "";
+        if (wort.length() <= 2) return wort;
+        char[] arr = wort.toCharArray();
+        Random rnd = new Random();
+        String gemischt = wort;
+        int versuche = 0;
+        while (gemischt.equalsIgnoreCase(wort) && versuche < 10) {
+            for (int i = arr.length - 1; i > 0; i--) {
+                int j = rnd.nextInt(i + 1);
+                char tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+            gemischt = new String(arr);
+            versuche++;
+        }
+        return gemischt;
+    }
+
+    public static void main(String[] args) {
+        try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
+        catch (Exception e) { }
+        FragenPool pool = new FragenPool();
+        pool.ladeAusDatei("fragen.txt");
+        MainFrame frame = new MainFrame();
+        new AppController(frame, pool);
+        frame.setVisible(true);
+    }
+}

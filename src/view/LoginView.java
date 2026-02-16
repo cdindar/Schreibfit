@@ -10,68 +10,69 @@ public class LoginView extends JPanel {
     public JLabel errorLabel = new JLabel(" ", SwingConstants.CENTER);
 
     public LoginView() {
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
         setBackground(MainFrame.BEIGE);
 
         JLabel title = new JLabel("SchreibFit Pro", SwingConstants.CENTER);
-        title.setFont(new Font("Serif", Font.BOLD, 44));
+        title.setFont(new Font("Serif", Font.BOLD, 48));
         title.setForeground(Color.DARK_GRAY);
-        title.setBorder(BorderFactory.createEmptyBorder(60, 20, 10, 20));
+        title.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
+        add(title, BorderLayout.NORTH);
 
-        JPanel center = new JPanel(new GridLayout(6, 1, 10, 10));
-        center.setOpaque(false);
-        center.setBorder(BorderFactory.createEmptyBorder(30, 220, 30, 220));
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Abstände zwischen den Elementen
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
 
-        JPanel row1 = new JPanel(new BorderLayout(10, 0));
-        row1.setOpaque(false);
         JLabel emailLabel = new JLabel("TGM Email:");
-        emailLabel.setPreferredSize(new Dimension(90, 30));
-        row1.add(emailLabel, BorderLayout.WEST);
-        emailField.setPreferredSize(new Dimension(460, 30));
-        row1.add(emailField, BorderLayout.CENTER);
+        emailLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        gbc.gridy = 0;
+        centerWrapper.add(emailLabel, gbc);
 
-        JPanel row2 = new JPanel(new BorderLayout(10, 0));
-        row2.setOpaque(false);
+        emailField.setPreferredSize(new Dimension(350, 40));
+        emailField.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        gbc.gridy = 1;
+        centerWrapper.add(emailField, gbc);
+
         JLabel passLabel = new JLabel("Passwort:");
-        passLabel.setPreferredSize(new Dimension(90, 30));
-        row2.add(passLabel, BorderLayout.WEST);
-        passField.setPreferredSize(new Dimension(460, 30));
-        row2.add(passField, BorderLayout.CENTER);
+        passLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        gbc.gridy = 2;
+        centerWrapper.add(passLabel, gbc);
+
+        passField.setPreferredSize(new Dimension(350, 40));
+        gbc.gridy = 3;
+        centerWrapper.add(passField, gbc);
 
         errorLabel.setForeground(new Color(255, 0, 0));
         errorLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        gbc.gridy = 4;
+        centerWrapper.add(errorLabel, gbc);
 
-        JPanel btnRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        btnRow.setOpaque(false);
+        loginBtn.setPreferredSize(new Dimension(350, 55)); // Schön groß und hoch
+        loginBtn.setFont(new Font("SansSerif", Font.BOLD, 18));
         loginBtn.setBackground(Color.WHITE);
-        loginBtn.setFont(new Font("SansSerif", Font.BOLD, 16));
-        loginBtn.setPreferredSize(new Dimension(220, 40));
-        btnRow.add(loginBtn);
+        loginBtn.setFocusPainted(false);
+        gbc.gridy = 5;
+        gbc.insets = new Insets(20, 10, 10, 10); // Mehr Abstand nach oben zum Button
+        centerWrapper.add(loginBtn, gbc);
 
         JLabel hint = new JLabel("Beispiel: mmustermann@student.tgm.ac.at", SwingConstants.CENTER);
         hint.setForeground(Color.GRAY);
         hint.setFont(new Font("SansSerif", Font.ITALIC, 12));
+        gbc.gridy = 6;
+        gbc.insets = new Insets(5, 10, 10, 10);
+        centerWrapper.add(hint, gbc);
 
-        center.add(row1);
-        center.add(row2);
-        center.add(errorLabel);
-        center.add(btnRow);
-        center.add(hint);
-        center.add(new JLabel(" ", SwingConstants.CENTER));
+        add(centerWrapper, BorderLayout.CENTER);
 
-        add(title);
-        add(center);
-        add(new JLabel(" "));
+        add(Box.createVerticalStrut(100), BorderLayout.SOUTH);
     }
 
     public void showError(String msg) {
         errorLabel.setText(msg);
-        Timer t = new Timer(2500, new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                errorLabel.setText(" ");
-            }
-        });
+        Timer t = new Timer(2500, e -> errorLabel.setText(" "));
         t.setRepeats(false);
         t.start();
     }

@@ -157,10 +157,14 @@ public class AppController {
         final VerwaltungView v = new VerwaltungView();
         refreshListe(v);
         v.backBtn.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zeigeHauptmenue();
+            }
         });
         v.neuBtn.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 v.liste.clearSelection();
                 v.clearFields();
                 v.setStatus("Neu: Felder ausfüllen und Speichern/Update drücken", true);
@@ -184,7 +188,8 @@ public class AppController {
             }
         });
         v.speichernBtn.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 String typ = (String) v.typBox.getSelectedItem();
                 String frage = v.frageField.getText().trim();
                 String antwort = v.antwortField.getText().trim();
@@ -209,7 +214,8 @@ public class AppController {
         });
 
         v.loeschenBtn.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 int sel = v.liste.getSelectedIndex();
                 if (sel < 0) {
                     v.setStatus("Bitte zuerst einen Eintrag auswählen!", false);
@@ -251,4 +257,121 @@ public class AppController {
             }
         });
         frame.setView(v);
+    }
+    private void refreshListe(VerwaltungView v) {
+        v.listeModel.clear();
+        for (int i = 0; i < pool.getAnzahl(); i++) {
+            Frage f = pool.getFrage(i);
+            v.listeModel.addElement(buildKurzText(f));
+        }
+    }
+
+    private String buildKurzText(Frage f) {
+        if (f == null) return "";
+        String head = f.typ + " (" + f.stufe + "): ";
+        String body = f.frage == null ? "" : f.frage;
+        if (body.length() > 40) body = body.substring(0, 40) + "...";
+        String ans = f.antwort == null ? "" : f.antwort;
+        return head + body + " -> " + ans;
+    }
+
+    private void zeigeQuizStufe() {
+        MenuView menu = new MenuView();
+        menu.setTitel("Quiz - Stufe wählen");
+        menu.setInfo("Wähle die Schwierigkeit (oder Alle)");
+        JButton b1 = new JButton("Alle");
+        JButton b2 = new JButton("Leicht");
+        JButton b3 = new JButton("Mittel");
+        JButton b4 = new JButton("Schwer");
+        JButton b5 = new JButton("Zurück");
+        menu.setButtons(new JButton[]{b1, b2, b3, b4, b5});
+        ActionListener start = new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                String stufe = ((JButton) e.getSource()).getText();
+                starteQuiz(stufe);
+            }
+        };
+        b1.addActionListener(start);
+        b2.addActionListener(start);
+        b3.addActionListener(start);
+        b4.addActionListener(start);
+        b5.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+        });
+        frame.setView(menu);
+    }
+
+    private void starteQuiz(String stufeFilter) {
+        quizSession = pool.erstelleQuizSession(10, stufeFilter);
+        quizIndex = 0;
+        quizRichtig = 0;
+        quizFalsch = 0;
+        if (quizSession.length == 0) {
+            JOptionPane.showMessageDialog(frame, "Keine Fragen gefunden. Bitte Fragenpool füllen.", "Hinweis", JOptionPane.INFORMATION_MESSAGE);
+            zeigeHauptmenue();
+            return;
+        }
+        zeigeQuizFrage();
+    }
+    private void zeigeQuizFrage() {
+        final QuizView v = new QuizView();
+        final Frage f = quizSession[quizIndex];
+        v.fortschrittLabel.setText((quizIndex + 1) + "/" + quizSession.length);
+        v.feedbackLabel.setText(" ");
+        v.antwortField.setEnabled(true);
+        v.pruefenBtn.setEnabled(true);
+        v.antwortField.setText("");
+        v.backBtn.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { zeigeHauptmenue(); }
+        });
+        if (f.typ != null && f.typ.equalsIgnoreCase("IMAGE")) {
+            v.frageTextLabel.setText("Schreibe das Wort zur URL:");
+            v.showUrl(f.frage);
+        } else {
+            v.hideUrl();
+            v.bildLabel.setIcon(null);
+            v.bildLabel.setText("");
+            v.frageTextLabel.setText(f.frage);
+        }
+        v.pruefenBtn.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { quizPruefen(v, f); }
+        });
+        v.antwortField.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { quizPruefen(v, f); }
+        });
+        frame.setView(v);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { v.antwortField.requestFocusInWindow(); }
+        });
+    }
+
+    private void quizPruefen(QuizView v, Frage f) {
+        String eingabe = v.antwortField.getText().trim();
+        boolean richtig = false;
+        if (f.antwort != null) {
+            richtig = eingabe.equalsIgnoreCase(f.antwort.trim());
+        }
+        if (richtig) {
+            quizRichtig++;
+            int p = pool.punkteFuer(f);
+            score += p;
+            frame.updateScore(score);
+            v.feedbackLabel.setText("Richtig! +" + p + " Punkte");
+            v.feedbackLabel.setForeground(new Color(0, 255, 0));
+        } else {
+            quizFalsch++;
+            v.feedbackLabel.setText("Falsch! Richtig: " + f.antwort);
+            v.feedbackLabel.setForeground(new Color(255, 0, 0));
+        }
+        v.pruefenBtn.setEnabled(false);
+        v.antwortField.setEnabled(false);
+        Timer t = new Timer(1500, new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                quizIndex++;
+                if (quizIndex >= quizSession.length) quizEnde();
+                else zeigeQuizFrage();
+            }
+        });
+        t.setRepeats(false);
+        t.start();
     }

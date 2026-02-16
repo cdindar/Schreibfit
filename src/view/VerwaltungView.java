@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VerwaltungView extends JPanel {
-    public JList<String> liste = new JList<String>();
-    public DefaultListModel<String> listeModel = new DefaultListModel<String>();
+    public JList<String> liste = new JList<>();
+    public DefaultListModel<String> listeModel = new DefaultListModel<>();
 
-    public JComboBox<String> typBox = new JComboBox<String>(new String[]{"TEXT", "IMAGE"});
+    public JComboBox<String> typBox = new JComboBox<>(new String[]{"TEXT", "IMAGE"});
     public JTextField frageField = new JTextField();
     public JTextField antwortField = new JTextField();
-    public JComboBox<String> stufeBox = new JComboBox<String>(new String[]{"Leicht", "Mittel", "Schwer"});
+    public JComboBox<String> stufeBox = new JComboBox<>(new String[]{"Leicht", "Mittel", "Schwer"});
 
     public JButton neuBtn = new JButton("Neu");
     public JButton speichernBtn = new JButton("Speichern/Update");
@@ -22,96 +22,84 @@ public class VerwaltungView extends JPanel {
     public JLabel statusLabel = new JLabel(" ", SwingConstants.CENTER);
 
     public VerwaltungView() {
-        setLayout(new GridLayout(2, 1));
+        setLayout(new BorderLayout());
         setBackground(MainFrame.BEIGE);
 
         JLabel title = new JLabel("Verwaltung", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 40));
         title.setForeground(Color.DARK_GRAY);
-        title.setBorder(BorderFactory.createEmptyBorder(30, 20, 10, 20));
+        title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        add(title, BorderLayout.NORTH);
 
-        JPanel center = new JPanel(new GridLayout(1, 2, 15, 15));
-        center.setOpaque(false);
-        center.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        JPanel mainContent = new JPanel(new GridLayout(1, 2, 30, 0));
+        mainContent.setOpaque(false);
+        mainContent.setBorder(BorderFactory.createEmptyBorder(0, 40, 20, 40));
+
+        JPanel left = new JPanel(new BorderLayout(0, 10));
+        left.setOpaque(false);
+        JLabel lTitle = new JLabel("Fragenpool", SwingConstants.CENTER);
+        lTitle.setFont(new Font("SansSerif", Font.BOLD, 18));
 
         liste.setModel(listeModel);
         JScrollPane scroll = new JScrollPane(liste);
 
-        JPanel left = new JPanel(new BorderLayout());
-        left.setOpaque(false);
-        JLabel lTitle = new JLabel("Fragenpool", SwingConstants.CENTER);
-        lTitle.setFont(new Font("SansSerif", Font.BOLD, 16));
         left.add(lTitle, BorderLayout.NORTH);
         left.add(scroll, BorderLayout.CENTER);
 
-        JPanel form = new JPanel(new GridLayout(8, 1, 8, 8));
-        form.setOpaque(false);
-
-        JPanel r1 = row("Typ:", typBox);
-        JPanel r2 = row("Frage/URL:", frageField);
-        JPanel r3 = row("Antwort:", antwortField);
-        JPanel r4 = row("Stufe:", stufeBox);
-
-        frageField.setPreferredSize(new Dimension(360, 28));
-        antwortField.setPreferredSize(new Dimension(360, 28));
-
-        JPanel actions = new JPanel(new GridLayout(3, 2, 10, 10));
-        actions.setOpaque(false);
-
-        neuBtn.setBackground(Color.WHITE);
-        speichernBtn.setBackground(Color.WHITE);
-        loeschenBtn.setBackground(Color.WHITE);
-        ladenBtn.setBackground(Color.WHITE);
-        dateiSpeichernBtn.setBackground(Color.WHITE);
-        backBtn.setBackground(Color.WHITE);
-
-        actions.add(neuBtn);
-        actions.add(speichernBtn);
-        actions.add(loeschenBtn);
-        actions.add(ladenBtn);
-        actions.add(dateiSpeichernBtn);
-        actions.add(backBtn);
-
-        statusLabel.setForeground(new Color(255, 0, 0));
-        statusLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
-
-        form.add(r1);
-        form.add(r2);
-        form.add(r3);
-        form.add(r4);
-        form.add(new JLabel(" ", SwingConstants.CENTER));
-        form.add(actions);
-        form.add(new JLabel(" ", SwingConstants.CENTER));
-        form.add(statusLabel);
-
-        JPanel right = new JPanel(new BorderLayout());
+        JPanel right = new JPanel(new GridBagLayout()); // GridBagLayout für volle Kontrolle!
         right.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
         JLabel rTitle = new JLabel("Bearbeiten", SwingConstants.CENTER);
-        rTitle.setFont(new Font("SansSerif", Font.BOLD, 16));
-        right.add(rTitle, BorderLayout.NORTH);
-        right.add(form, BorderLayout.CENTER);
+        rTitle.setFont(new Font("SansSerif", Font.BOLD, 18));
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        gbc.insets = new Insets(0, 0, 15, 0);
+        right.add(rTitle, gbc);
 
-        center.add(left);
-        center.add(right);
+        gbc.gridwidth = 1; gbc.insets = new Insets(5, 5, 5, 5);
 
-        add(title);
-        add(center);
+        addFormField(right, "Typ:", typBox, 1, gbc);
+        addFormField(right, "Frage/URL:", frageField, 2, gbc);
+        addFormField(right, "Antwort:", antwortField, 3, gbc);
+        addFormField(right, "Stufe:", stufeBox, 4, gbc);
+
+        statusLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
+        gbc.insets = new Insets(10, 0, 10, 0);
+        right.add(statusLabel, gbc);
+
+        JPanel buttonGrid = new JPanel(new GridLayout(3, 2, 10, 10));
+        buttonGrid.setOpaque(false);
+
+        JButton[] allBtns = {neuBtn, speichernBtn, loeschenBtn, ladenBtn, dateiSpeichernBtn, backBtn};
+        for (JButton b : allBtns) {
+            b.setBackground(Color.WHITE);
+            b.setFont(new Font("SansSerif", Font.BOLD, 14));
+            b.setPreferredSize(new Dimension(0, 40)); // Hier erzwingen wir eine ordentliche Höhe!
+            buttonGrid.add(b);
+        }
+
+        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 2;
+        right.add(buttonGrid, gbc);
+
+        mainContent.add(left);
+        mainContent.add(right);
+        add(mainContent, BorderLayout.CENTER);
     }
 
-    private JPanel row(String label, JComponent comp) {
-        JPanel p = new JPanel(new BorderLayout(10, 0));
-        p.setOpaque(false);
-        JLabel l = new JLabel(label);
-        l.setPreferredSize(new Dimension(90, 28));
-        p.add(l, BorderLayout.WEST);
-        p.add(comp, BorderLayout.CENTER);
-        return p;
+    private void addFormField(JPanel panel, String labelText, JComponent comp, int row, GridBagConstraints gbc) {
+        gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0;
+        panel.add(new JLabel(labelText), gbc);
+        gbc.gridx = 1; gbc.weightx = 1.0;
+        comp.setPreferredSize(new Dimension(comp.getPreferredSize().width, 30));
+        panel.add(comp, gbc);
     }
 
     public void setStatus(String text, boolean ok) {
         statusLabel.setText(text);
-        if (ok) statusLabel.setForeground(new Color(0, 255, 0));
-        else statusLabel.setForeground(new Color(255, 0, 0));
+        statusLabel.setForeground(ok ? new Color(0, 255, 0) : Color.RED);
     }
 
     public void clearFields() {
